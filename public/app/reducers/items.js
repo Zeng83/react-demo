@@ -1,4 +1,4 @@
-import Immutable from "immutable";
+import remove from "lodash/remove";
 import {handleActions} from "redux-actions";
 import {
   ADD_ITEM,
@@ -6,16 +6,22 @@ import {
   DELETE_ALL
 } from "../constants/actionTypes";
 
-const initialItems = Immutable.List([1, 2, 3]);
+const initialItems = [];
 
 export default handleActions({
   [ADD_ITEM]: (state = initialItems, action) => {
-    return state.push(state.size !== 0 ? state.get(-1) + 1 : 1);
+    return [
+      ...state,
+      state.length
+    ];
   },
   [DELETE_ITEM]: (state = initialItems, action) => {
-    return state.delete(state.indexOf(action.item));
+    return remove(state, (item) => {
+      return item !== action.item
+    });
+
   },
   [DELETE_ALL]: (state = initialItems, action) => {
-    return state.clear();
+    return initialItems;
   }
 }, initialItems);
