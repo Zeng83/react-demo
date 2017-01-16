@@ -8,7 +8,7 @@ class SearchBar extends Component{
       <div className="pure-form">
         <input type="text" onKeyUp={filterItem} placeholder="search here" />
       </div>
-    )
+    );
   }
 }
 

@@ -1,13 +1,14 @@
 import {compose, createStore, applyMiddleware} from "redux";
 
 import thunk from "redux-thunk";
+import thunkMiddleware from "redux-thunk";
 import rootReducer from "./reducers";
 
 var buildStore;
 
 if (__DEBUG__) {
   buildStore = compose(
-    applyMiddleware(thunk),
+    applyMiddleware(thunkMiddleware),
     require("redux-devtools").devTools(),
     require("redux-devtools").persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
   )(createStore);
