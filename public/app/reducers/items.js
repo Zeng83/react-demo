@@ -6,7 +6,7 @@ import {
   DELETE_ALL
 } from "../constants/actionTypes";
 
-const initialItems = [1];
+const initialItems = [0 ,1, 2, 3];
 
 export default handleActions({
   [ADD_ITEM]: (state = initialItems, action) => {
