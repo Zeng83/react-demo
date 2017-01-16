@@ -5,8 +5,12 @@ class SearchBar extends Component{
     const {filterItem} = this.props;
 
     return (
-      <div className="pure-form">
-        <input type="text" onKeyUp={filterItem} placeholder="search here" />
+      <div className="search-form">
+        <input
+          className="search-input"
+          type="text"
+          onKeyUp={filterItem}
+          placeholder="hungry? search food from here"/>
       </div>
     );
   }
