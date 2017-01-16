@@ -13,9 +13,25 @@ class App extends Component{
     const {actions, items, filter} = this.props;
 
     return (
-      <div>
-        <h2>Find your favor restaurant from here</h2>
-        <SearchBar filterItem={actions.filterItem}/>
+      <div className="page-wrapper">
+        <header className="header">
+          <div className="header-wrapper">
+            <nav className="nav-wrapper">
+              <div className="left-nav"><span className="homepage-title">Demo</span></div>
+              <div className="right-nav">
+                <ul>
+                  <li className="user-info-list">
+                    <a href="#">User Name</a>
+                  </li>
+                  <li className="user-info-list">
+                    <a href="#">Login</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+            <SearchBar filterItem={actions.filterItem}/>
+          </div>
+        </header>
         <Content items={items} filter={filter} deleteItem={actions.deleteItem}/>
         <Footer addItem={actions.addItem} deleteAll={actions.deleteAll}/>
       </div>
