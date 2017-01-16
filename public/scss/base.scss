@@ -1,3 +1,7 @@
+$break-xs: 320px;
+$break-s: 480px;
+$break-m: 768px;
+$break-l: 1024px;
 
 * {
   -moz-box-sizing: border-box;
@@ -65,7 +69,7 @@ ul {
   }
 
   &:before {
-    content: "\f16c";
+    content: "\e802";
     display: block;
     position: absolute;
     top: .6rem;
@@ -101,11 +105,24 @@ ul {
   display: inline-block;
 }
 
+.item-detail {
+  padding: 0 100px 0 10px;
+
+  @media screen and (max-width: $break-s) {
+    display: block;
+    padding: 10px 0;
+
+    .item-detail-list {
+      padding: 0;
+    }
+  }
+}
+
 .item-detail-list-item {
   float: none;
 }
 
-.item-image {
+.item-image img{
   height: 7rem;
   width: 7rem;
 }

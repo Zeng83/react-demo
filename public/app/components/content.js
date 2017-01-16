@@ -32,7 +32,7 @@ class LiItem extends Component {
           <div className="item-top">
             <div className="item-info">
               <div className="item-image">
-                <a href="#"><img src="" /></a>
+                <a href="#"><img src="//image.freepik.com/free-icon/question-mark_318-52837.jpg" /></a>
               </div>
               <div className="item-detail">
                 <ul className="item-detail-list">
