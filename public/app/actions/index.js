@@ -3,11 +3,17 @@ import {
   ADD_ITEM,
   DELETE_ITEM,
   DELETE_ALL,
-  FILTER_ITEM
+  FILTER_ITEM,
+  SEARCH_BY_TYPE,
+  SEARCH_BY_LOCATION
 } from "../constants/actionTypes";
-import {fetchSearchRequest} from "../api/search.api";
+import {
+  fetchSearchRequest,
+  fetchByFoodType,
+  fetchByLocation
+} from "../api/search.api";
 
-export const addItem = () => (dispatch) => {
+export const addItem = () => (dispatch, getState) => {
   return fetchSearchRequest().then((response) => {
     if (response.status >= 400) {
       throw new Error("Bad response from server");
@@ -22,16 +28,54 @@ export const addItem = () => (dispatch) => {
   });
 }
 
-export const deleteAll = () => {
-  return {
-    type: DELETE_ALL
+export const filterItem = (val) => (dispatch, getState) => {
+  const state = getState();
+  const searchBy = state.filter.searchBy || "type";
+  const searchContent = val;
+
+  if (searchBy === "type") {
+    return fetchByFoodType(val).then((response) => {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      dispatch({
+        type: ADD_ITEM,
+        payload: data
+      });
+    });
+  } else {
+    return fetchByLocation(val).then((response) => {
+      if (response.status >= 400) {
+        throw new Error("Bad response from server");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      dispatch({
+        type: ADD_ITEM,
+        payload: data
+      });
+    });
   }
 }
 
-export const filterItem = (e) => {
-  const filterItem = get(e, "target.value");
+export const searchByLocation = () => {
   return {
-    type: FILTER_ITEM,
-    filterItem
+    type: SEARCH_BY_LOCATION
+  }
+}
+
+export const searchByType = () => {
+  return {
+    type: SEARCH_BY_TYPE
+  }
+}
+
+export const deleteAll = () => {
+  return {
+    type: DELETE_ALL
   }
 }

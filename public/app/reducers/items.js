@@ -12,7 +12,6 @@ const initialItems = [];
 export default handleActions({
   [ADD_ITEM]: (state = initialItems, action) => {
     return [
-      ...state,
       ...get(action, "payload.query.results.Result", [])
     ];
   },

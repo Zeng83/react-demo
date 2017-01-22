@@ -8,9 +8,9 @@ const DEFAULT_IMAGE = "//s3-media1.fl.yelpcdn.com/assets/srv0/yelp_styleguide/d5
 
 class Content extends Component {
   render() {
-    const {items, filter} = this.props;
+    const {items} = this.props;
     const itemsArr = map(items, (item, index) =>
-      <LiItem filter={filter} item={item} key={index} />
+      <ListItem item={item} key={index} />
     );
 
     return (
@@ -21,7 +21,7 @@ class Content extends Component {
   }
 }
 
-class LiItem extends Component {
+class ListItem extends Component {
   _renderImage() {
     const {item} = this.props;
     const imageSrc = item.Image
@@ -48,17 +48,15 @@ class LiItem extends Component {
     return (
       <span>
         {map(item.Categories.Category || [], (_categroy, index) => {
-          return (<a className="catetory" href="#">{_categroy.content}&nbsp;</a>);
+          return (<a className="catetory" key={index} href="#">{_categroy.content}&nbsp;</a>);
         })}
       </span>
     );
   }
 
   render() {
-    const {filter, item} = this.props;
-    const liClass = classNames("list-item", {
-      "hidden": !isEmpty(filter) && filter != item
-    });
+    const {item} = this.props;
+    const liClass = classNames("list-item");
     const lastReviewIntro = get(item, "Rating.LastReviewIntro", "");
 
     return (
