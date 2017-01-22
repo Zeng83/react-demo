@@ -2,13 +2,5 @@ import Promise from "bluebird";
 import fetch from "isomorphic-fetch";
 
 export const fetchSearchRequest = () => {
-  // TODO: WIP: hookup search api from here
-  // return fetch("http://developer.yahoo.com/yql/console/?q=show%20tables", {
-  //   // method: "POST",
-  //   // body: stream
-  // });
-  return Promise.resolve({
-    id: 123,
-    name: "huaji"
-  })
+  return fetch("http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20zip=%2294560%22%20and%20query=%22Italian%22&format=json");
 };

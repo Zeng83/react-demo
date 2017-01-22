@@ -8,19 +8,18 @@ import {
 import {fetchSearchRequest} from "../api/search.api";
 
 export const addItem = () => (dispatch) => {
-  return fetchSearchRequest().then((resp) => {
+  return fetchSearchRequest().then((response) => {
+    if (response.status >= 400) {
+      throw new Error("Bad response from server");
+    }
+    return response.json();
+  })
+  .then((data) => {
     dispatch({
       type: ADD_ITEM,
-      payload: resp
+      payload: data
     });
   });
-}
-
-export const deleteItem = (item) => {
-  return {
-    type: DELETE_ITEM,
-    item
-  }
 }
 
 export const deleteAll = () => {

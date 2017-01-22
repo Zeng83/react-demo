@@ -8,12 +8,12 @@ class Footer extends Component{
         <button
           className="pure-button button-secondary button-small"
           onClick={addItem}>
-            add
+            Test Load
         </button>
         <button
           className="pure-button button-error button-small"
           onClick={deleteAll}>
-            deleteAll
+            Remove all
           </button>
       </div>
     )

@@ -95,6 +95,10 @@ ul {
   border-bottom: 1px solid #444;
 }
 
+.item-top {
+  margin-bottom: 6px;
+}
+
 .item-info,
 .item-address {
   display: inline-block;
@@ -106,15 +110,16 @@ ul {
 }
 
 .item-detail {
-  padding: 0 100px 0 10px;
+  width: 332px;
+  padding: 0 0 0 20px;
+
+  .item-detail-list {
+    padding: 0;
+  }
 
   @media screen and (max-width: $break-s) {
     display: block;
     padding: 10px 0;
-
-    .item-detail-list {
-      padding: 0;
-    }
   }
 }
 
@@ -125,4 +130,37 @@ ul {
 .item-image img{
   height: 7rem;
   width: 7rem;
+}
+
+.catetory,
+.item-title {
+  color: #0073bb;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.item-title {
+  font-size: 16px;
+  line-height: 1.3125em;
+}
+
+.photo-box-img {
+  height: 30px;
+  width: 30px;
+}
+
+.item-bottom {
+  display: table-row;
+
+  .last-reviewer-image {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .last-reviewer-content {
+    display: table-cell;
+    padding-left: 7px;
+    max-width: 600px;
+  }
 }
