@@ -47,20 +47,39 @@ class ListItem extends Component {
 
     return (
       <span>
-        {map(item.Categories.Category || [], (_categroy, index) => {
+        {map(categorys || [], (_categroy, index) => {
           return (<a className="catetory" key={index} href="#">{_categroy.content}&nbsp;</a>);
         })}
       </span>
     );
   }
 
-  render() {
+  _renderLastReview() {
     const {item} = this.props;
-    const liClass = classNames("list-item");
-    const lastReviewIntro = get(item, "Rating.LastReviewIntro", "");
+    const lastReviewIntro = get(item, "Rating.LastReviewIntro");
+
+    if (!lastReviewIntro) {
+      return null;
+    }
 
     return (
-      <li className={liClass}>
+      <div className="item-bottom">
+        <div className="last-reviewer-image">
+          <img className="photo-box-img" src={DEFAULT_IMAGE} />
+        </div>
+        <div className="last-reviewer-content">
+          <span>{lastReviewIntro}</span>
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+    const {item} = this.props;
+    const listClass = classNames("list-item");
+
+    return (
+      <li className={listClass}>
         <div className="item-wrapper">
           <div className="item-top">
             <div className="item-info">
@@ -84,14 +103,7 @@ class ListItem extends Component {
               <span>{item.Phone}</span>
             </div>
           </div>
-          <div className="item-bottom">
-            <div className="last-reviewer-image">
-              <img className="photo-box-img" src={DEFAULT_IMAGE} />
-            </div>
-            <div className="last-reviewer-content">
-              <span>{lastReviewIntro}</span>
-            </div>
-          </div>
+          {this._renderLastReview()}
         </div>
       </li>
     );

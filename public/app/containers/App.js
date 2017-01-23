@@ -33,11 +33,12 @@ class App extends Component{
               filterItem={actions.filterItem}
               searchByLocation={actions.searchByLocation}
               searchByType={actions.searchByType}
+              filter={filter}
               />
           </div>
         </header>
         <Content items={items} filter={filter} deleteItem={actions.deleteItem}/>
-        <Footer addItem={actions.addItem} deleteAll={actions.deleteAll}/>
+        <Footer deleteAll={actions.deleteAll}/>
       </div>
     )
   }

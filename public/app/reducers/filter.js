@@ -3,7 +3,9 @@ import {handleActions} from "redux-actions";
 import {
   FILTER_ITEM,
   SEARCH_BY_LOCATION,
-  SEARCH_BY_TYPE
+  SEARCH_BY_TYPE,
+  LOCATION,
+  FOOD
 } from "../constants/actionTypes";
 
 const initialFilterItem = {};
@@ -26,7 +28,23 @@ export default handleActions({
       searchBy: "type"
     };
   },
+  [LOCATION]: (state = {}, action) => {
+    console.log("location reducer", action);
+    return {
+      ...state,
+      location: action.payload
+    };
+  },
+  [FOOD]: (state = {}, action) => {
+    console.log("food reducer", action);
+    return {
+      ...state,
+      food: action.payload
+    };
+  }
 }, {
   initialFilterItem: null,
-  searchBy: null
+  searchBy: "type",
+  location: "san francisco",
+  food: ""
 });

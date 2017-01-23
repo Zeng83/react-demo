@@ -1,16 +1,26 @@
+import get from "lodash/get";
 import Promise from "bluebird";
 import fetch from "isomorphic-fetch";
 
-export const fetchSearchRequest = () => {
-  return fetch("//query.yahooapis.com/v1/public/yql?q=select%20*%20from%20local.search%20where%20zip=%2294560%22%20and%20query=%22Italian%22&format=json");
-};
+const queryBuilder = (options) => {
+  const searchContent = get(options, "searchContent", "");
+  const searchBy = get(options, "searchBy");
+  let location = get(options, "location", "");
+  let foodOfType = get(options, "food", "");
 
-export const fetchByLocation = (val) => {
-  const url = "//query.yahooapis.com/v1/public/yql?q=SELECT%20*%20FROM%20local.search%20WHERE%20location=%22"+ val +"%22%20and%20query=%22%22&format=json";
-  return fetch(url);
+  if (searchBy === "type") {
+    foodOfType = searchContent;
+  } else {
+    location = searchContent
+  }
+
+  const sqlQuery = `SELECT * FROM local.search WHERE location="` + location + `" and query="`+foodOfType+`"`;
+
+  return encodeURI(sqlQuery);
 }
 
-export const fetchByFoodType = (val) => {
-  const url = "//query.yahooapis.com/v1/public/yql?q=SELECT%20*%20FROM%20local.search%20WHERE%20location=%22sunnyvale%22%20and%20query=%22"+ val +"%22&format=json";
+export const fetchSearchRequest = (options) => {
+  const query = queryBuilder(options);
+  const url = "//query.yahooapis.com/v1/public/yql?q="+ query +"&format=json";
   return fetch(url);
 }

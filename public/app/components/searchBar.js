@@ -30,7 +30,8 @@ class SearchBar extends Component{
   }
 
   render() {
-    const {filterItem, searchByLocation, searchByType} = this.props;
+    const {filterItem, searchByLocation, searchByType, filter} = this.props;
+    const type = get(filter, "searchBy");
 
     return (
       <div>
@@ -48,14 +49,16 @@ class SearchBar extends Component{
               name="search-type"
               value="type of food"
               onClick={searchByType}
+              checked={type === "type"}
             />&nbsp;Filted By type of Food
-          </span>
+          </span>&nbsp;&nbsp;
           <span>
             <input
               type="radio"
               name="search-type"
               value="location"
               onClick={searchByLocation}
+              checked={type === "location"}
             />&nbsp;Filted By location
           </span>
         </div>
