@@ -1,4 +1,5 @@
 import remove from "lodash/remove";
+import get from "lodash/get";
 import {handleActions} from "redux-actions";
 import {
   ADD_ITEM,
@@ -6,13 +7,12 @@ import {
   DELETE_ALL
 } from "../constants/actionTypes";
 
-const initialItems = [0 ,1, 2, 3];
+const initialItems = [];
 
 export default handleActions({
   [ADD_ITEM]: (state = initialItems, action) => {
     return [
-      ...state,
-      state.length
+      ...get(action, "payload.query.results.Result", [])
     ];
   },
   [DELETE_ITEM]: (state = initialItems, action) => {

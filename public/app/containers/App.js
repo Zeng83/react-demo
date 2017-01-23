@@ -29,11 +29,16 @@ class App extends Component{
                 </ul>
               </div>
             </nav>
-            <SearchBar filterItem={actions.filterItem}/>
+            <SearchBar
+              filterItem={actions.filterItem}
+              searchByLocation={actions.searchByLocation}
+              searchByType={actions.searchByType}
+              filter={filter}
+              />
           </div>
         </header>
         <Content items={items} filter={filter} deleteItem={actions.deleteItem}/>
-        <Footer addItem={actions.addItem} deleteAll={actions.deleteAll}/>
+        <Footer deleteAll={actions.deleteAll}/>
       </div>
     )
   }
@@ -41,13 +46,13 @@ class App extends Component{
 
 App.propTypes = {
   items: PropTypes.array,
-  filter: PropTypes.string
+  filter: PropTypes.object
 };
 
 const mapState = (state) => {
   return {
     items: get(state, "items", []),
-    filter: get(state, "filter")
+    filter: get(state, "filter", {})
   };
 };
 

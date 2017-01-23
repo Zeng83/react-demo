@@ -1,14 +1,26 @@
+import get from "lodash/get";
 import Promise from "bluebird";
 import fetch from "isomorphic-fetch";
 
-export const fetchSearchRequest = () => {
-  // TODO: WIP: hookup search api from here
-  // return fetch("http://developer.yahoo.com/yql/console/?q=show%20tables", {
-  //   // method: "POST",
-  //   // body: stream
-  // });
-  return Promise.resolve({
-    id: 123,
-    name: "huaji"
-  })
-};
+const queryBuilder = (options) => {
+  const searchContent = get(options, "searchContent", "");
+  const searchBy = get(options, "searchBy");
+  let location = get(options, "location", "");
+  let foodOfType = get(options, "food", "");
+
+  if (searchBy === "type") {
+    foodOfType = searchContent;
+  } else {
+    location = searchContent
+  }
+
+  const sqlQuery = `SELECT * FROM local.search WHERE location="` + location + `" and query="`+foodOfType+`"`;
+
+  return encodeURI(sqlQuery);
+}
+
+export const fetchSearchRequest = (options) => {
+  const query = queryBuilder(options);
+  const url = "//query.yahooapis.com/v1/public/yql?q="+ query +"&format=json";
+  return fetch(url);
+}
