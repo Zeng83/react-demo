@@ -21,4 +21,16 @@ $ npm start
 
 URLS to test things out:
 
-* [`127.0.0.1:3000/`]
+* [`localhost:3000/`]
+
+in this demo we have app and SCSS folder within public folder
+
+app
+  - actions (all the actions will locate here, so we can dispatch action from components)
+  - api (all the api call out fetch will be here, action will call fetch from here)
+  - components (content, footer, and search bar components)
+  - constants (action types)
+  - containers (App component is be here in order to import all sub components)
+  - reducers (we use redux to maintain the state tree)
+scss
+  - base.scss
